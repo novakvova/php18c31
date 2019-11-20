@@ -51,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </div>
 
+<?php include "_scripts.php"; ?>
 
 <?php include "_footer.php"; ?>
 
