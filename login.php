@@ -44,7 +44,7 @@
                             <input type="submit" class="btnSubmit" value="Login" />
                         </div>
                         <div class="form-group">
-                            <a href="#" class="ForgetPwd">Forget Password?</a>
+                            <a href="register.php" class="ForgetPwd">Реєстрація</a>
                         </div>
                     </form>
                 </div>
