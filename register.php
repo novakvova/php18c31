@@ -3,6 +3,8 @@ $errors = array();
 $email = '';
 $password = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include_once "connection_database.php";
+
     if (isset($_POST['email']) and !empty($_POST['email'])) {
         $email = $_POST['email'];
     } else {
@@ -64,11 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         });
         $('#form_register #image').on('input', function()
         {
-            //let val= $(this).val();
             readURL(this);
-            //alert(val);
-            //$(this).parent().append("<img src='"+val+"'/>");
-            //valid_hide($(this));
         });
 
         function valid_hide(child)

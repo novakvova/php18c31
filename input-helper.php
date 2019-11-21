@@ -9,7 +9,7 @@ function create_input($name, $label, $type, $errors)
     }
 
 
-    $isError=isset($errors[$name])&& !empty($errors[$name]);
+    $isError=isset($errors[$name]) && !empty($errors[$name]);
     $valid= $isError ? 'is-invalid' :'';
     print <<<END
             <div class="form-group">
@@ -21,15 +21,11 @@ function create_input($name, $label, $type, $errors)
                        value="$value"/>
             
     END;
-
     if($isError)
         print <<<ERROR
             <div class="invalid-feedback d-block">
                 $errors[$name]
             </div>
     ERROR;
-
     echo "</div>";
-
-
 }
