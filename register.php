@@ -17,16 +17,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors["password"] = "Поле є обов'язковим";
     }
 
-    if (isset($_POST['image']) and !empty($_POST['image'])) {
-        //$password = $_POST['image'];
-        ;
-    } else {
-        $errors["image"] = "Поле є обов'язковим";
-    }
-
+    
     if (count($errors) == 0) {
-        header("Location: /index.php");
-        exit;
+        $uploaddir = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
+        $file_name= uniqid('300_').'.jpg';
+        $file_save_path=$uploaddir.$file_name;
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $file_save_path)) {
+            echo "Файл корректен и был успешно загружен.\n";
+        } else {
+            echo "Возможная атака с помощью файловой загрузки!\n";
+        }
+
+        //($_FILES['image']['tmp_name']
+        // $sql = "INSERT INTO tbl_users (Email, Password, Image) VALUES (?,?,?)";
+        // $stmt= $dbh->prepare($sql);
+        // $stmt->execute([$email, $password, "ssdfasfd"]);
+
+        // header("Location: /index.php");
+        // exit;
     }
 }
 ?>
@@ -36,14 +44,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="row mt-3">
     <div class="offset-md-3 col-md-6">
         <h3>Створення нового акаунта</h3>
-        <form method="post" id="form_register">
+        <form method="post" id="form_register" enctype="multipart/form-data">
 
             <?php create_input("email", "Електронна пошта", "email", $errors); ?>
 
             <?php create_input("password","Пароль", "password", $errors); ?>
 
             <?php create_input("image","Фото", "file", $errors); ?>
-<img id="prev"/>
+<img id="prev" width="200"/>
             <div class="form-group">
                 <input type="submit" class="btnSubmit" value="Реєстрація"/>
             </div>
