@@ -28,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Возможная атака с помощью файловой загрузки!\n";
         }
 
-        //($_FILES['image']['tmp_name']
-        // $sql = "INSERT INTO tbl_users (Email, Password, Image) VALUES (?,?,?)";
-        // $stmt= $dbh->prepare($sql);
-        // $stmt->execute([$email, $password, "ssdfasfd"]);
+        $urlPath="/uploads/".$file_name;
+        $sql = "INSERT INTO tbl_users (Email, Password, Image) VALUES (?,?,?)";
+        $stmt= $dbh->prepare($sql);
+        $stmt->execute([$email, $password, $urlPath]);
 
-        // header("Location: /index.php");
-        // exit;
+        header("Location: /users.php");
+        exit;
     }
 }
 ?>
