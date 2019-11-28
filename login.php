@@ -11,6 +11,8 @@
             $errors["email"]="Поле пошта є обов'язковим";
 
         if(count($errors)==0) {
+            session_start();
+            $_SESSION["id"]=uniqid();
             header("Location: /index.php");
             exit;
         }

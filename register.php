@@ -17,6 +17,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors["password"] = "Поле є обов'язковим";
     }
 
+    session_start();
+	if (md5($_POST['norobot']) == $_SESSION['randomnr2'])	{ 
+        //$password = "Ghj,ktv";
+		// // here you  place code to be executed if the captcha test passes
+		// 	echo "Hey great , it appears you are not a robot";
+	}	else {  
+		// here you  place code to be executed if the captcha test fails
+        $errors["captcha"] = "Не вірна каптча";
+	}
+
     
     if (count($errors) == 0) {
         $uploaddir = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
@@ -42,15 +52,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php include "_header.php"; ?>
 <?php include_once "input-helper.php"?>
 <div class="row mt-3">
+
     <div class="offset-md-3 col-md-6">
         <h3>Створення нового акаунта</h3>
+        <?php
+        if(isset($errors["captcha"]))
+        {
+            echo "<h5>".$errors["captcha"]."</h5>";
+        }
+        ?>
         <form method="post" id="form_register" enctype="multipart/form-data">
 
             <?php create_input("email", "Електронна пошта", "email", $errors); ?>
 
             <?php create_input("password","Пароль", "password", $errors); ?>
 
+            <input class="input" type="text" name="norobot" />
+		    <img src="captcha.php" />
+
             <?php create_input("image","Фото", "file", $errors); ?>
+
+
 <img id="prev" width="200"/>
             <div class="form-group">
                 <input type="submit" class="btnSubmit" value="Реєстрація"/>
